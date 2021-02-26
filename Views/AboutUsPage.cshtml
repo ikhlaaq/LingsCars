@@ -1,0 +1,7 @@
+﻿	@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.AboutUsPage>
+		@using ContentModels = LingsCars.Models.ContentTypes;
+		@{
+		Layout = "Master.cshtml";
+		}
+
+		@Html.GetGridHtml(Model, "pageBody")

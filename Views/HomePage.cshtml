@@ -1,0 +1,25 @@
+﻿    @inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.HomePage>
+    @using ContentModels = LingsCars.Models.ContentTypes;
+    @{
+        Layout = "Master.cshtml";
+    }
+    @Html.Partial("SlideShow")
+    @Model.Value("pageContent")
+
+
+
+
+    @{
+        var selection = Umbraco.Content(Guid.Parse("daee98f5-2b81-471c-9063-7f92a0d1757b"))
+        .ChildrenOfType("carsReview")
+        .Where(x => x.IsVisible())
+        .OrderByDescending(x => x.CreateDate);
+    }
+
+    @foreach (var item in selection)
+    {
+        <div>
+            <div>@item.Name, @item.CreateDate</div>
+            <div>@item.Value("review")</div>
+        </div>
+    }

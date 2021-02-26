@@ -1,0 +1,15 @@
+{
+  "id": "44cdf9d2-9849-46ed-9ea4-6129f6f5abb9",
+  "name": "Create as content",
+  "form": "5bef5628-a347-4149-a6a2-19b31635eddd",
+  "active": true,
+  "includeSensitiveData": "False",
+  "workflowTypeId": "89fb1e31-9f36-4e08-9d1b-af1180d340db",
+  "executesOn": "Submitted",
+  "settings": {
+    "Fields": "{\"doctype\":\"carsReview\",\"nameField\":\"6324f67e-764c-42e4-d4cb-c8336a86e88d\",\"properties\":[{\"id\":\"review\",\"value\":\"Review\",\"$$hashKey\":\"object:3292\",\"field\":\"53a893f1-fcf1-4a8b-bc91-b0a6ce2910b9\"},{\"id\":\"reviewer\",\"value\":\"Reviewer\",\"$$hashKey\":\"object:3293\",\"field\":\"6324f67e-764c-42e4-d4cb-c8336a86e88d\"}]}",
+    "Publish": "True",
+    "RootNode": "1091"
+  },
+  "sortOrder": 0
+}

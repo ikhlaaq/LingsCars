@@ -1,0 +1,115 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@using ContentModels = LingsCars.Models.ContentTypes;
+
+
+@{
+    var pageId = Model.MacroParameters["ourFeaturedVehicles"].ToString();
+    var numberofitems = Convert.ToInt32(Model.MacroParameters["numberofItems"].ToString());
+
+    var featuredVehiclesPage = Umbraco.Content(pageId);
+    var theFeaturedVehicles = featuredVehiclesPage.Children().Where(x => x.IsVisible()).Take(numberofitems);
+
+}
+<main style="background-color: #E4F9F5">
+    <h1 class="text-center pt-5 text-info"><strong>Featured Vehicles</strong></h1>
+    <div class="row px-5 pb-5 text-center justify-content-around">
+        <div class="col-md-6 col-lg-3">
+
+            @foreach (ContentModels.VehiclePageDetails item in theFeaturedVehicles)
+            {
+                if (item.VehicleCategory == "Cars")
+                {
+                    <div class="card mt-5" style="width: 18rem;">
+
+
+                        <div>
+                            @{
+                                var typedMediaPickerSingle = item.Value<IPublishedContent>("image");
+                                if (typedMediaPickerSingle != null)
+                                {
+                                    <img class="card-img-top" src="@typedMediaPickerSingle.Url" style="width: 286px; height: 180px" alt="@typedMediaPickerSingle.Value("alt")" />
+                                }
+                            }
+
+                        </div>
+                        <div class="card-body">
+                            <h3>@item.Title</h3>
+                            <p>@item.Price</p>
+                        </div>
+                        <a class="btn btn-info btn-lg" href="@item.Url()">View Details</a>
+
+                    </div>
+
+                }
+
+            }
+        </div>
+
+
+        <div class="col-md-6 col-lg-3">
+
+            @foreach (ContentModels.VehiclePageDetails item in theFeaturedVehicles)
+            {
+                if (item.VehicleCategory == "Trucks")
+                {
+                    <div class="card mt-5" style="width: 18rem;">
+
+                        <div>
+                            @{
+                                var typedMediaPickerSingle = item.Value<IPublishedContent>("image");
+                                if (typedMediaPickerSingle != null)
+                                {
+                                    <img class="card-img-top" src="@typedMediaPickerSingle.Url" style="width: 286px; height: 180px" alt="@typedMediaPickerSingle.Value("alt")" />
+                                }
+                            }
+
+                        </div>
+                        <div class="card-body">
+
+                            <h3>@item.Title</h3>
+                            <p>@item.Price</p>
+                        </div>
+                        <a class="btn btn-success btn-lg" href="@item.Url()">View Details</a>
+
+                    </div>
+
+                }
+
+            }
+
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+
+            @foreach (ContentModels.VehiclePageDetails item in theFeaturedVehicles)
+            {
+                if (item.VehicleCategory == "Motorcycles")
+                {
+                    <div class="card mt-5" style="width: 18rem;">
+
+                        <div>
+                            @{
+                                var typedMediaPickerSingle = item.Value<IPublishedContent>("image");
+                                if (typedMediaPickerSingle != null)
+                                {
+                                    <img class="card-img-top" src="@typedMediaPickerSingle.Url" style="width: 286px; height: 180px" alt="@typedMediaPickerSingle.Value("alt")" />
+                                }
+                            }
+
+                        </div>
+                        <div class="card-body">
+
+                            <h3>@item.Title</h3>
+                            <p>@item.Price</p>
+                        </div>
+                        <a class="btn btn-warning btn-lg" href="@item.Url">View Details</a>
+
+                    </div>
+
+                }
+
+            }
+
+        </div>
+    </div>
+</main>

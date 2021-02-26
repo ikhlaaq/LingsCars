@@ -1,0 +1,45 @@
+﻿    @inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.SearchPage>
+    @using ContentModels = LingsCars.Models.ContentTypes;
+    @{
+        Layout = "Master.cshtml";
+    }
+    @{
+        var searchQuery = Request.QueryString["q"];
+    }
+
+
+    <div class="card text-center py-5" style="width: 100rem; background-color: #E4F9F5">
+
+        @if (!string.IsNullOrWhiteSpace(searchQuery))
+        {
+            // string.Empty since we're not using culture
+            var results = Umbraco.ContentQuery.Search(searchQuery, string.Empty);
+
+            int resultsCount = results != null && results.Any() ? results.Count() : 0;
+
+            <p>Your search found @resultsCount results</p>
+            if (resultsCount > 0)
+            {
+                foreach (var result in results)
+                {
+                    <div>
+                        <a href="@result.Content.Url()">
+                            @result.Content.Name
+
+                            <div>
+                                @{
+                                    var typedMediaPickerSingle = result.Content.Value<IPublishedContent>("image");
+                                    if (typedMediaPickerSingle != null)
+                                    {
+                                        <img class="card-img-top" src="@typedMediaPickerSingle.Url" style="width: 286px; height: 180px; border-radius: 20px" alt="@typedMediaPickerSingle.Value("alt")" />
+                                    }
+                                }
+
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+        }
+    </div>
+   

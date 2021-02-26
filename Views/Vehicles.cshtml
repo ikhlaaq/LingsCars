@@ -1,0 +1,101 @@
+﻿    @inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Vehicles>
+    @using ContentModels = LingsCars.Models.ContentTypes;
+    @{
+        var homePage = (ContentModels.HomePage)Model.Root();
+        Layout = "Master.cshtml";
+    }
+
+    <main style="background-color: #E4F9F5">
+        <h1 class="text-center pt-5 mb-5 text-info"><strong>All Vehicles</strong></h1>
+        <div class="row px-5 pb-5 text-center justify-content-around">
+            <div class="col-md-6 col-lg-3">
+                <h2 class="text-info">Cars</h2>
+                @foreach (ContentModels.VehiclePageDetails item in Model.Children())
+                {
+                    if (item.VehicleCategory == "Cars")
+                    {
+                        <div class="card mt-5" style="width: 18rem;">
+                            <div>
+                                @{
+                                    var typedMediaPickerSingle = item.Value<IPublishedContent>("image");
+                                    if (typedMediaPickerSingle != null)
+                                    {
+                                        <img class="card-img-top" src="@typedMediaPickerSingle.Url" style="width: 286px; height: 180px" alt="@typedMediaPickerSingle.Value("alt")" />
+                                    }
+                                }
+                            </div>
+                            <div class="card-body">
+                                <h3>@item.Title</h3>
+                                <p>@item.Price</p>
+                            </div>
+                            <a class="btn btn-info btn-lg" href="@item.Url()">View Details</a>
+
+                        </div>
+                    }
+                }
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <h2 class="text-success">Trucks</h2>
+                @foreach (ContentModels.VehiclePageDetails item in Model.Children())
+                {
+                    if (item.VehicleCategory == "Trucks")
+                    {
+                        <div class="card mt-5" style="width: 18rem;">
+
+                            <div>
+                                @{
+                                    var typedMediaPickerSingle = item.Value<IPublishedContent>("image");
+                                    if (typedMediaPickerSingle != null)
+                                    {
+                                        <img class="card-img-top" src="@typedMediaPickerSingle.Url" style="width: 286px; height: 180px" alt="@typedMediaPickerSingle.Value("alt")" />
+                                    }
+                                }
+
+                            </div>
+                            <div class="card-body">
+
+                                <h3>@item.Title</h3>
+                                <p>@item.Price</p>
+                            </div>
+                            <a class="btn btn-success btn-lg" href="@item.Url()">View Details</a>
+                        </div>
+                    }
+
+                }
+
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <h2 class="text-warning">Motorcycles</h2>
+                @foreach (ContentModels.VehiclePageDetails item in Model.Children())
+                {
+                    if (item.VehicleCategory == "Motorcycles")
+                    {
+                        <div class="card mt-5" style="width: 18rem;">
+
+                            <div>
+                                @{
+                                    var typedMediaPickerSingle = item.Value<IPublishedContent>("image");
+                                    if (typedMediaPickerSingle != null)
+                                    {
+                                        <img class="card-img-top" src="@typedMediaPickerSingle.Url" style="width: 286px; height: 180px" alt="@typedMediaPickerSingle.Value("alt")" />
+                                    }
+                                }
+
+                            </div>
+                            <div class="card-body">
+
+                                <h3>@item.Title</h3>
+                                <p>@item.Price</p>
+                            </div>
+                            <a class="btn btn-warning btn-lg" href="@item.Url()">View Details</a>
+
+                        </div>
+
+                    }
+
+                }
+
+            </div>
+        </div>
+    </main>

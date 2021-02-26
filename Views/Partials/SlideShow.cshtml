@@ -1,0 +1,48 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+
+    @{
+        var  vehicles = Model.Descendant("vehiclePageDetails").Children();
+    }
+
+
+    @{
+        var active = "active";
+    }
+
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" style="background-color: #5bc0de !important;
+        ">
+            @foreach (var vehiclePageDetails in vehicles)
+            {
+                <div class="carousel-item @active">
+                    <div>
+                        <h1 class="text-center mt-4 mb-5 text-light"><strong>Our Unique Collection</strong></h1>
+                        @{
+                            var typedMediaPickerSingle = vehiclePageDetails.Value<IPublishedContent>("image");
+                            if (typedMediaPickerSingle != null)
+                            {
+                                <img src="@typedMediaPickerSingle.Url" class="d-block mx-auto w-50" style="border-radius: 30px" alt="@typedMediaPickerSingle.Value("alt")" />
+                            }
+                        }
+
+                        <h1 class="d-flex h-100 align-items-center justify-content-center text-light">@vehiclePageDetails.Value("title")</h1>
+                        <h3 class="d-flex h-100 align-items-center justify-content-center text-light">@vehiclePageDetails.Value("price")</h3>
+                        <div class="text-center pb-2"><a class="btn btn-primary btn-lg" href="@vehiclePageDetails.Url()">Click for More Details</a></div>
+                    </div>
+
+
+
+                </div>
+                active = "";
+            }
+        </div>
+
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
